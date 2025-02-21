@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -b",
-    "start": "node --watch dist/index.js",
+    "start": "node --watch backend/dist/index.js",
     "dev": "npm run build && npm run start"
   },
   "keywords": [],
