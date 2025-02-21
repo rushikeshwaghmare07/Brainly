@@ -5,16 +5,17 @@ interface DecodedToken {
   id: string;
 }
 
-export const authMiddleware = async (
+export const authMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): void => {
   const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
   if (!token) {
-    return res.status(401).json({
+    res.status(401).json({
       message: "Unauthorized.",
     });
+    return;
   }
 
   try {
@@ -23,9 +24,10 @@ export const authMiddleware = async (
       process.env.JWT_SECRET as string
     ) as DecodedToken;
     if (!decodedToken) {
-      return res.status(401).json({
+      res.status(401).json({
         message: "Unauthorized.",
       });
+      return;
     }
 
     req.userId = decodedToken.id;
@@ -33,6 +35,6 @@ export const authMiddleware = async (
     return next();
   } catch (error) {
     console.error("Error occurs while decoded the token:", error);
-    return res.status(500).json({ message: "Invalid token" });
+    res.status(500).json({ message: "Invalid token" });
   }
 };
