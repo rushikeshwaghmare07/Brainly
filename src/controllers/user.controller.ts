@@ -110,8 +110,4 @@ export const userSignin = async (
         (error as Error).message || "Something went wrong while login the user",
     });
   }
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 01e79961173018d990a764152be9613cd7a7945b
