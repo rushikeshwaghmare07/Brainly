@@ -39,7 +39,10 @@ export const addContent = async (
   }
 };
 
-export const getContent = async (req: Request, res: Response) => {
+export const getContent = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const userId = req.userId;
 
@@ -47,11 +50,13 @@ export const getContent = async (req: Request, res: Response) => {
       path: "userId",
       select: "username",
     });
-    if (!content) {
-      res.status(400).json({
+
+    if (content.length === 0) {
+      res.status(200).json({
         success: false,
-        message: "No Content Available.",
+        message: "No content available.",
       });
+      return;
     }
 
     res.status(200).json({
@@ -70,7 +75,10 @@ export const getContent = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteContent = async (req: Request, res: Response): Promise<void>  => {
+export const deleteContent = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const { contentId } = req.params;
 
@@ -82,7 +90,10 @@ export const deleteContent = async (req: Request, res: Response): Promise<void> 
       return;
     }
 
-    const content = await ContentModel.findOne({ _id: contentId, userId: req.userId });
+    const content = await ContentModel.findOne({
+      _id: contentId,
+      userId: req.userId,
+    });
 
     if (!content) {
       res.status(404).json({
