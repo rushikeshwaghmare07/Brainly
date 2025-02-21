@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 import UserModel, { IUser } from "../models/user.model";
 import jwt from "jsonwebtoken";
 
-export const userSignup = async ( req: Request, res: Response ): Promise<void> => {
+export const userSignup = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
@@ -107,4 +110,8 @@ export const userSignin = async (
         (error as Error).message || "Something went wrong while login the user",
     });
   }
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 01e79961173018d990a764152be9613cd7a7945b
