@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import { connectDB } from "./db/index"
 import userRoutes from "./routes/auth.routes.js";
 import contentRoutes from "./routes/content.routes.js"
+import shareRoutes from "./routes/share.routes.js"
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/contents", contentRoutes);
+app.use("/api/v1/brain", shareRoutes);
 
 connectDB()
   .then(() => {
