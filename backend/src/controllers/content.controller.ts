@@ -60,7 +60,7 @@ export const getContent = async (
     }
 
     res.status(200).json({
-      success: false,
+      success: true,
       message: "Content retrieved successfully.",
       content: content,
     });
